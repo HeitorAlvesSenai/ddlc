@@ -18,15 +18,20 @@ class Icon:
 
         self.title = pg.image.load('textures/iconddlc.jpg').convert_alpha()
         self.back_ground = load_texture_2d(self.title)
+
+        self.start_tick = pg.time.get_ticks()
+        self.elapsed_seconds = 0
         
     def update(self):
-        if self.y > self.final_point:
-            self.y -= self.game.dt_sec * 250
-            if self.y < self.final_point:
-                self.y = self.final_point
+        if self.elapsed_seconds > 1:
+            if self.y > self.final_point:
+                self.y -= self.game.dt_sec * 500
+                if self.y < self.final_point:
+                    self.y = self.final_point
+        else:self.elapsed_seconds = (pg.time.get_ticks() - self.start_tick) / 1000
             
         pass
-    
+
     def draw(self):
         self.menu_background()
 

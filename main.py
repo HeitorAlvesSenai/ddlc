@@ -7,6 +7,7 @@ import sys
 from mainMenu.mainMenu import MainMenu
 from mainMenu.icon import Icon
 from mainMenu.interface import Interface
+from mainMenu.persons import Persons
 
 class Game:
     def __init__(self):
@@ -31,22 +32,26 @@ class Game:
         self.mainMenu = MainMenu(self)
         self.icon = Icon(self)
         self.interface = Interface(self)
+        self.persons = Persons(self)
 
     def checkEvents(self):
         for event in pg.event.get():
-            if event.type == pg.QUIT:
+            if event.type == pg.QUIT or event.type == pg.KEYDOWN and event.key == pg.K_ESCAPE:
                 pg.quit()
                 sys.exit()
+                    
 
     def update(self):
         self.interface.update()
         self.icon.update()
+        self.persons.update()
 
     def draw(self):
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT)
         self.mainMenu.draw()
         self.interface.draw()
         self.icon.draw()
+        self.persons.draw()
         pg.display.flip()
 
     def run(self):

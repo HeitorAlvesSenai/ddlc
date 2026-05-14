@@ -17,12 +17,18 @@ class Interface:
 
         self.title = pg.image.load('textures/interface.jpg').convert_alpha()
         self.back_ground = load_texture_2d(self.title)
+        
+        self.start_tick = pg.time.get_ticks()
+        self.elapsed_seconds = 0
     
     def update(self):
+        #if self.elapsed_seconds > 2:
+            #self.start_tick = pg.time.get_ticks()
         if self.x < 0:
-            self.x += self.game.dt_sec * 500
+            self.x += self.game.dt_sec * 600
             if self.x > 0:
                 self.x = 0
+        #else:self.elapsed_seconds = (pg.time.get_ticks() - self.start_tick) / 1000
             
         pass
 
